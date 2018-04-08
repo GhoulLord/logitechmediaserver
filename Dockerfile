@@ -9,7 +9,9 @@ ENV USER=logitech \
     PUID=1008 \
     PGID=100
 
-ARG http_proxy RUN echo "deb http://www.deb-multimedia.org jessie main non-free" | tee -a /etc/apt/sources.list && \
+ARG http_proxy
+
+RUN echo "deb http://www.deb-multimedia.org jessie main non-free" | tee -a /etc/apt/sources.list && \
     apt-get update && apt-get install -y --force-yes deb-multimedia-keyring && \
     apt-get upgrade -y --force-yes && \
     apt-get install -y --force-yes \
