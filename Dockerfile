@@ -43,7 +43,8 @@ RUN echo "de_DE.UTF-8 UTF-8" > /etc/locale.gen && \
     echo LANG=\"de_DE.UTF-8\" > /etc/default/locale
 
 # Move config dir to allow editing convert.conf, use a fixed UID to share externally
-RUN useradd --system --uid $PUID -M -s /bin/false -d /usr/share/squeezeboxserver -c "Logitech Media Server user" $USER && \
+RUN addgroup -g $PGID -S $GROUP && \
+    adduser -u $PUID -G $GROUP -s /bin/sh -SDH $USER && \
     mkdir -p /mnt/state/etc && \
     mv /etc/squeezeboxserver /etc/squeezeboxserver.orig && \
     cp -pr /etc/squeezeboxserver.orig/* /mnt/state/etc && \
